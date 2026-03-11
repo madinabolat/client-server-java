@@ -4,11 +4,11 @@ package org.example;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-//        Sockets, Server-Client, communication protocol -
-//        bytes, data transfer back and worth
-//        Serialize objects
-//        Send a random matrix to the server and send the sum of all elements back.
-
-
+        //set up socket
+        //start server
+        //client
+        //create matrix
+        //serialize
+        //send
     }
 }
