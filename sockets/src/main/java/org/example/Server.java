@@ -8,15 +8,15 @@ public class Server {
     private static final int PORT = 1234;
 
     public static void main(String[] args) {
-        //do with try use so that socket closes.
-        //research try use. 
-        try {
-            ServerSocket server = new ServerSocket(PORT);
+        try (ServerSocket server = new ServerSocket(PORT)){
             while (true){
-                try{
-                    Socket socket = server.accept();
+                try(
+                        Socket socket = server.accept();
+                        //input stream
+
+                ){
                 }
-                catch(Exception e){
+                catch(Exception e) {
                     e.printStackTrace();
                 }
             }
