@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,8 +13,7 @@ public class Server {
             while (true){
                 try(
                         Socket socket = server.accept();
-                        //input stream
-
+                        InputStream input = socket.getInputStream();
                 ){
                 }
                 catch(Exception e) {
