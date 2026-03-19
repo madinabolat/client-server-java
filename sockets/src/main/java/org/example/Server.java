@@ -1,5 +1,7 @@
 package org.example;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -9,19 +11,19 @@ public class Server {
     private static final int PORT = 1234;
 
     public static void main(String[] args) {
-        try (ServerSocket server = new ServerSocket(PORT)){
-            while (true){
-                try(
-                        Socket socket = server.accept();
-                        InputStream input = socket.getInputStream();
-                ){
-                }
-                catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch(Exception e) {
+        try {
+            System.out.println("Starting a server...");
+
+            ServerSocket server = new ServerSocket(PORT);
+            System.out.println("Server started on port" + PORT);
+
+            Socket client = server.accept();
+            System.out.println("Client connected");
+
+            InputStream input = client.getInputStream();
+
+            server.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
