@@ -2,6 +2,7 @@ package org.example;
 
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -20,7 +21,9 @@ public class Server {
             Socket client = server.accept();
             System.out.println("Client connected");
 
-            InputStream input = client.getInputStream();
+            DataInputStream dataInputStream = new DataInputStream(client.getInputStream());
+            String input = dataInputStream.readUTF();
+            System.out.println(input);
 
             server.close();
         } catch (IOException e) {
