@@ -24,7 +24,11 @@ public class Server {
             DataInputStream dataInputStream = new DataInputStream(client.getInputStream());
             String input = dataInputStream.readUTF();
             System.out.println(input);
+            int num1 = dataInputStream.readInt();
+            int num2 = dataInputStream.readInt();
+            int sum = num1 + num2;
 
+            System.out.println("The sum is " + sum);
             server.close();
         } catch (IOException e) {
             e.printStackTrace();
