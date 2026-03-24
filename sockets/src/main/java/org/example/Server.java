@@ -27,6 +27,8 @@ public class Server {
             int num1 = dataInputStream.readInt();
             int num2 = dataInputStream.readInt();
             int sum = num1 + num2;
+            //receive matrix 1, matrix 2
+            //send back sum
 
             System.out.println("The sum is " + sum);
             server.close();

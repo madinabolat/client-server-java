@@ -12,6 +12,8 @@ public class Client {
             dataOutputStream.writeUTF("hello from client!");
             dataOutputStream.writeInt(1);
             dataOutputStream.writeInt(2);
+            //send matrix 1
+            //send matrix 2
             dataOutputStream.flush();
             dataOutputStream.close();
 
