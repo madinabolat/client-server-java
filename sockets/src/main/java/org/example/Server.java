@@ -2,9 +2,7 @@ package org.example;
 
 import org.w3c.dom.ls.LSOutput;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,21 +16,30 @@ public class Server {
             ServerSocket server = new ServerSocket(PORT);
             System.out.println("Server started on port" + PORT);
 
-            Socket client = server.accept();
+            Socket clientConnection = server.accept();
             System.out.println("Client connected");
 
-            DataInputStream dataInputStream = new DataInputStream(client.getInputStream());
-            String input = dataInputStream.readUTF();
-            System.out.println(input);
-            int num1 = dataInputStream.readInt();
-            int num2 = dataInputStream.readInt();
-            int sum = num1 + num2;
-            //receive matrix 1, matrix 2
-            //send back sum
+            ObjectInputStream objectInputStream = new ObjectInputStream(clientConnection.getInputStream());
+            int[][] matrix = (int[][]) objectInputStream.readObject();
+            System.out.println("Server received matrix.");
+            int n = matrix.length;
+            int m = matrix[0].length;
 
-            System.out.println("The sum is " + sum);
+            int sum = 0;
+            for (int i = 0; i < n; i++){
+                for (int j = 0; j < m; j++){
+                    sum += matrix[i][j];
+                }
+            }
+
+            DataOutputStream dataOutputStream = new DataOutputStream(clientConnection.getOutputStream());
+            dataOutputStream.writeInt(sum);
+            System.out.println("Matrix sum sent to client.");
+            clientConnection.close();
             server.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
