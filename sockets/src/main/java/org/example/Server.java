@@ -16,10 +16,10 @@ public class Server {
             ServerSocket server = new ServerSocket(PORT);
             System.out.println("Server started on port" + PORT);
 
-            Socket client = server.accept();
+            Socket clientConnection = server.accept();
             System.out.println("Client connected");
 
-            ObjectInputStream objectInputStream = new ObjectInputStream(client.getInputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(clientConnection.getInputStream());
             int[][] matrix = (int[][]) objectInputStream.readObject();
             System.out.println("Server received matrix.");
             int n = matrix.length;
@@ -32,10 +32,10 @@ public class Server {
                 }
             }
 
-            DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream());
+            DataOutputStream dataOutputStream = new DataOutputStream(clientConnection.getOutputStream());
             dataOutputStream.writeInt(sum);
             System.out.println("Matrix sum sent to client.");
-
+            clientConnection.close();
             server.close();
         } catch (IOException e) {
             e.printStackTrace();
